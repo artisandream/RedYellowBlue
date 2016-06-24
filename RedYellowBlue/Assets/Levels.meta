@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 guid: 965a02a691e0a414d8bb9997e50b108c
 folderAsset: yes
@@ -9,6 +10,12 @@ folderAsset: yes
 timeCreated: 1466700578
 >>>>>>> Stashed changes
 licenseType: Pro
+=======
+guid: 421641b6975774500a8ecc0d04e4dcad
+folderAsset: yes
+timeCreated: 1466700953
+licenseType: Free
+>>>>>>> BallDragandRespawn
 DefaultImporter:
   userData: 
   assetBundleName: 
