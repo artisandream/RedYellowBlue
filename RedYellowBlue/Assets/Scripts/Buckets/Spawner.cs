@@ -22,32 +22,27 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	void IncreaseTickTime () {
-		if(StaticVars.spawnTick > 0.5f) {
-			StaticVars.spawnTick -= 0.25f;
-		} else {
-			ChangeTime = null;
-		}
-	}
-
-	IEnumerator RunPositionUpdater () {
+	IEnumerator RunSpawnPositionUpdater () {
 		while (StaticVars.canPlay) {
 			StartCoroutine(RealRandomNum());
 			StaticVars.resetPosition.x = newRandomNum;
 			lastRandomNum = newRandomNum;
-			yield return new WaitForSeconds(StaticVars.spawnTick);
-			if(ChangeTime != null)
-				ChangeTime();
-
-			if(i<buckets.Count){
-				StartCoroutine(buckets[i].RespawnBucket());
-				i++;
-			} else {
-				i=0;
-			}
+			yield return new WaitForSeconds(0.1f);
 		}
+
+		StartCoroutine(RunSpawnPositionUpdater());
 		yield return null;
-		StartCoroutine(RunPositionUpdater());
+	}
+		
+	public void SpawnBucket () {
+		print(i);
+		print(buckets.Count);
+		if(i<buckets.Count-1){
+			i++;
+		} else {
+			i=0;
+		}
+		StartCoroutine(buckets[i].RespawnBucket());
 	}
 
 	void AddBuckets (BucketBase _b) {
@@ -55,10 +50,10 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void Start () {
-		print (this);
-		buckets = new List<BucketBase>();
 		BucketBase.AddThisToSpawner += AddBuckets;
-		ChangeTime = IncreaseTickTime;
-		StartCoroutine(RunPositionUpdater());
+		StaticVars.resetPosition.y = 7;
+		BucketMover.CallSpawn = SpawnBucket;
+		buckets = new List<BucketBase>();
+		StartCoroutine(RunSpawnPositionUpdater());
 	}
 }

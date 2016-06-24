@@ -4,31 +4,13 @@ using System;
 
 public class BucketBase : MonoBehaviour {
 
-	Action Move;
+	public static Action MoveNext;
 	public static Action<BucketBase> AddThisToSpawner;
 
+	private Vector3 startPos;
 	private Color nextColor;
-	private Vector3 currentPosition;
 	private Renderer materialRender;
-
-	void MoveBucket ()
-	{
-		currentPosition.y = StaticVars.globalSpeed;
-		transform.Translate (currentPosition);
-	}
-
-	void Update () {
-		if (Move != null)
-			Move ();
-	}
-
-	void Start (){
-		print (this);
-		//if(AddThisToSpawner != null)
-			AddThisToSpawner(this);
-		materialRender = GetComponent<Renderer>();
-		ChangeColor();
-	}
+	private Transform thisParent;
 
 	void ChangeColor () {
 		nextColor = GameColor.RandomColor();
@@ -36,14 +18,29 @@ public class BucketBase : MonoBehaviour {
 		materialRender.material.SetColor("_EmissionColor", nextColor);
 	}
 
-	public IEnumerator RespawnBucket () {
+	IEnumerator DropBucket () {
 		ChangeColor();
-		Move = MoveBucket;
+		startPos = transform.position;
+		while(startPos.y > 0.01f) {
+			startPos.y = Mathf.Lerp(startPos.y, 0, StaticVars.globalSpeed*Time.deltaTime);
+			transform.position = startPos;
+			yield return null;
+		}
+		transform.parent = thisParent;
+		MoveNext();
+	}
+
+	public IEnumerator RespawnBucket () {
+		transform.parent = null;
 		transform.position = StaticVars.resetPosition;
+		StartCoroutine(DropBucket());
 		yield return null;
 	}
 
-	void OnTriggerEnter () {
-		Move = null;
+	void Start (){
+		materialRender = GetComponent<Renderer>();
+		ChangeColor();
+		thisParent = transform.parent;
+		AddThisToSpawner(this);
 	}
 }
