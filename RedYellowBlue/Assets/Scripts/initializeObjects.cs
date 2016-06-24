@@ -4,8 +4,10 @@ using System.Collections;
 public class initializeObjects : MonoBehaviour {
 
 	Color red = Color.red;
-	//Color yellow = Color.yellow;
-	//Color blue = Color.blue;
+	Color yellow = Color.yellow;
+	Color blue = Color.blue;
+
+	public Renderer rend;
 
 	public char ballColor;
 
@@ -14,9 +16,13 @@ public class initializeObjects : MonoBehaviour {
 
 		//if (ballColor = "R")
 		{	
-			Renderer rend = GetComponent<Renderer>();
-			//rend.material.shader = Shader.Find("Specular");
-			rend.material.SetColor("blueBall", red);
+//			rend = GetComponent<Renderer>();
+//			rend.enabled = true;
+//
+//			rend.material.SetColor("_Color",red);
+//			rend.material.SetColor("_EmissionColor", red);
+//
+//			print ("color");
 		}
 	
 	}
