@@ -6,6 +6,7 @@ public class BucketBase : MonoBehaviour {
 
 	public static Action MoveNext;
 	public static Action<BucketBase> AddThisToSpawner;
+	public string colorAttr;
 
 	private Vector3 startPos;
 	private Color nextColor;
@@ -15,7 +16,8 @@ public class BucketBase : MonoBehaviour {
 	void ChangeColor () {
 		nextColor = GameColor.RandomColor();
 		materialRender.material.SetColor("_Color", nextColor);
-	//	materialRender.material.SetColor("_EmissionColor", nextColor);
+		colorAttr = nextColor.ToString();
+		print(colorAttr);
 	}
 
 	IEnumerator DropBucket () {
@@ -41,6 +43,7 @@ public class BucketBase : MonoBehaviour {
 		materialRender = GetComponent<Renderer>();
 		ChangeColor();
 		thisParent = transform.parent;
-		AddThisToSpawner(this);
+		if(AddThisToSpawner != null)	
+			AddThisToSpawner(this);
 	}
 }
