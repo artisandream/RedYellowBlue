@@ -35,8 +35,6 @@ public class Spawner : MonoBehaviour {
 	}
 		
 	public void SpawnBucket () {
-		print(i);
-		print(buckets.Count);
 		if(i<buckets.Count-1){
 			i++;
 		} else {

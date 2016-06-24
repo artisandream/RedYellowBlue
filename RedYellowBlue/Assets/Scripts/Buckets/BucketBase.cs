@@ -15,7 +15,7 @@ public class BucketBase : MonoBehaviour {
 	void ChangeColor () {
 		nextColor = GameColor.RandomColor();
 		materialRender.material.SetColor("_Color", nextColor);
-		materialRender.material.SetColor("_EmissionColor", nextColor);
+	//	materialRender.material.SetColor("_EmissionColor", nextColor);
 	}
 
 	IEnumerator DropBucket () {
