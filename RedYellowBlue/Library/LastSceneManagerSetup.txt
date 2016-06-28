@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-sceneSetups: []
-=======
 sceneSetups:
-- path: Assets/Levels/Balls.unity
+- path: Assets/Levels/DetectHit.unity
   isLoaded: 1
   isActive: 1
->>>>>>> BallDragandRespawn

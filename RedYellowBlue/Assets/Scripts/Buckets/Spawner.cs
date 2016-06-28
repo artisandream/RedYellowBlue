@@ -52,6 +52,6 @@ public class Spawner : MonoBehaviour {
 		StaticVars.resetPosition.y = 7;
 		BucketMover.CallSpawn = SpawnBucket;
 		buckets = new List<BucketBase>();
-		StartCoroutine(RunSpawnPositionUpdater());
+		//StartCoroutine(RunSpawnPositionUpdater());
 	}
 }
