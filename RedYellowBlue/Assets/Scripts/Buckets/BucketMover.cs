@@ -8,7 +8,7 @@ public class BucketMover : MonoBehaviour {
 	private Vector3 newPos;
 
 	IEnumerator MoveBuckets () {
-		newPos.z += StaticVars.moveIncrement;
+		newPos.x += StaticVars.moveIncrement;
 		while(Vector3.Distance(transform.position, newPos) > 0.01f)
 		{
 			transform.position = Vector3.Lerp(transform.position, newPos, StaticVars.globalSpeed * Time.deltaTime);
