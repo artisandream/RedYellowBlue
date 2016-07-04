@@ -10,12 +10,13 @@ public class BucketBase : MonoBehaviour {
 
 	private Vector3 startPos;
 	private Color nextColor;
-	private Renderer materialRender;
+	public SpriteRenderer materialRender;
 	private Transform thisParent;
 
 	void ChangeColor () {
 		nextColor = GameColor.RandomColor();
-		materialRender.material.SetColor("_Color", nextColor);
+		nextColor.a = 10;
+		materialRender.color = (nextColor);
 		colorAttr = nextColor.ToString();
 		print(colorAttr);
 	}
@@ -40,7 +41,7 @@ public class BucketBase : MonoBehaviour {
 	}
 
 	void Start (){
-		materialRender = GetComponent<Renderer>();
+		//materialRender = GetComponent<SpriteRenderer>();
 		ChangeColor();
 		thisParent = transform.parent;
 		if(AddThisToSpawner != null)	
